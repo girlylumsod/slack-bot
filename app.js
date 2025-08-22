@@ -7,7 +7,7 @@ const app = new App({
 });
 
 // List of allowed channels (add more IDs as needed)
-const ALLOWED_CHANNELS = ["C08JKA33JD8", "C099LC2V2QN"]; 
+const ALLOWED_CHANNELS = ["C08JKA33JD8", "C099LC2V2QN","C07GFGU9DQS"]; 
 
 app.event("reaction_added", async ({ event, client }) => {
   try {
