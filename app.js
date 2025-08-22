@@ -6,11 +6,13 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-const ALLOWED_CHANNEL = "C099LC2V2QN";
+// List of allowed channels (add more IDs as needed)
+const ALLOWED_CHANNELS = ["C08JKA33JD8", "C099LC2V2QN"]; 
 
 app.event("reaction_added", async ({ event, client }) => {
   try {
-    if (event.item.channel !== ALLOWED_CHANNEL) return;
+    // Ignore events outside of allowed channels
+    if (!ALLOWED_CHANNELS.includes(event.item.channel)) return;
     if (event.reaction === "accountingchecked") return;
 
     if (event.reaction === "slack") {
@@ -27,7 +29,7 @@ app.event("reaction_added", async ({ event, client }) => {
         await client.chat.postMessage({
           channel: event.item.channel,
           thread_ts: event.item.ts,
-          text: `:wave: Hi Sir <@${originalUser}>, thanks for posting! Can you please add buyer's name?`
+          text: `:wave: Hi Sir <@${originalUser}>, thank you for posting! Can you please add the buyer's name?`
         });
       }
     }
